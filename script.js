@@ -182,3 +182,31 @@ function stopwatchStop(){
 }
 stopwatchButton.onclick = stopwatchStart;
 // let stopwatchStopButton = document.getElementById("stopwatch_stopbutton");
+
+let throwingX = 0;
+let throwingY = 0;
+let throwingVX = 5;
+let throwingVY = 0;
+let throwingObject = document.getElementById("throwing_object");
+let throwingTimerId = -1;
+function throwingUpdate(){
+    throwingVY += 1;
+    throwingX += throwingVX;
+    throwingY += throwingVY;
+    throwingObject.style.top = throwingY + "px";
+    throwingObject.style.left = throwingX + "px";
+}
+function throwingReset(){
+    throwingX = 0;
+    throwingY = 0;
+    throwingVX = 5;
+    throwingVY = 0;
+    if(throwingTimerId == -1){
+        throwingTimerId = setInterval(throwingUpdate, 50);
+    }
+}
+function throwingHit(){
+    throwingVY = -throwingVY;
+}
+document.getElementById("throwing_reset").onclick = throwingReset;
+document.getElementById("throwing_hit").onclick = throwingHit;
